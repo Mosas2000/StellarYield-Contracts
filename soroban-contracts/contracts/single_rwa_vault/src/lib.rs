@@ -717,6 +717,9 @@ impl SingleRWAVault {
         amount: i128,
     ) {
         spender.require_auth();
+        require_not_blacklisted(e, &spender);
+        require_not_blacklisted(e, &from);
+        require_not_blacklisted(e, &to);
         update_user_snapshot(e, &from);
         update_user_snapshot(e, &to);
         let allowance = get_share_allowance(e, &from, &spender);
