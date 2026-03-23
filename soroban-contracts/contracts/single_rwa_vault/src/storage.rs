@@ -391,3 +391,14 @@ pub fn put_redemption_request(e: &Env, id: u32, req: RedemptionRequest) {
             BALANCE_BUMP_AMOUNT,
         );
 }
+
+// ─────────────────────────────────────────────────────────────────────────────
+// Blacklist (persistent)
+// ─────────────────────────────────────────────────────────────────────────────
+
+pub fn get_blacklisted(e: &Env, addr: &Address) -> bool {
+    e.storage()
+        .persistent()
+        .get(&DataKey::Blacklisted(addr.clone()))
+        .unwrap_or(false)
+}
